@@ -12,6 +12,10 @@ gt_val=1;
 
 
 //PUSH
+
+
+
+
 func Push(segment,i,f_asm,name_file)
 {
  i_int = 0; 
@@ -70,6 +74,11 @@ func Push(segment,i,f_asm,name_file)
   
 }
 
+
+
+
+
+
 //POP
 
 func Pop(segment,i,f_asm,name_file)
@@ -124,6 +133,11 @@ func Pop(segment,i,f_asm,name_file)
 
 }
 
+
+
+
+
+
 //ADD
 
 func Add(f_asm)
@@ -138,9 +152,14 @@ func Add(f_asm)
   write ,f_asm,"M=M-1\n";
 
 }
+
+
+
+
+
 //SUB
 
-func Sub
+func Sub(f_asm)
 {
   write,f_asm,"//sub";
   write ,f_asm,"@SP";
@@ -152,9 +171,13 @@ func Sub
   write ,f_asm,"M=M-1\n";
 }
 
+
+
+
+
 //IF(EQ,LT,GT)
 
-func IF(segment)
+func IF(segment,f_asm)
 {
   extern eq_val,lt_val,gt_val;
 
@@ -211,18 +234,23 @@ func IF(segment)
 
 }
 
+
+
+
 //NEG
 
-func neg
+func neg(f_asm)
 {
   write ,f_asm,"@SP";
   write ,f_asm,"A=M-1";
   write ,f_asm,"M=-M\n";
 }
 
+
+
 //BIT
 
-func BIT(segment)
+func BIT(segment,f_asm)
 {
    write ,f_asm,"@SP";
    write ,f_asm,"A=M-1";
@@ -241,47 +269,6 @@ func BIT(segment)
    write ,f_asm,"M=M-1\n";
 }
 
-func readfile(fvm,f_asm)
-{
-  
-//we open the file
-    f_vm = open(fvm, "r");
-    if (!f_vm) return;
-	
-	while (1) {
-	
-        line = rdline(f_vm);
-        if (!line) break;
-		
-		remaining = line;
-		token = strtok(remaining); 
-		if (token(1)  ) 
-		{
-		 if(token(1)== "push")
-		 {
-		    remaining=token(2);
-			token = strtok(remaining); 
-		    Push ,token(1),token(2),f_asm,fvm;
-		 }
-		 else if(token(1)== "pop")
-		 {
-		    remaining=token(2);
-			token = strtok(remaining);
-            Pop ,token(1),token(2),f_asm,fvm;			
-		 }
-		 else if(token(1)== "add")Add,f_asm;
-		 else if(token(1)== "sub")Sub;
-		 else if(token(1)== "neg")neg;
-		 else if(token(1)== "eq"||token(1)== "lt"||token(1)== "gt") IF,token(1);
-		 else if(token(1)== "not"||token(1)== "and"||token(1)== "or") BIT,token(1);
-		}
-		
-		   
-    }
-	
-close, f_vm;
-	
-}
 
 
 
@@ -293,43 +280,5 @@ close, f_vm;
 
 
 
-
-// --- Main Execution ---
-
-
-write, "Please enter the full path to the project folder";
-path = strtrim(rdline(stdin));
-if (cd(path)) {
-    
-	
-	
-    write, "Success! Folder exists.";
-	
-    all_files = lsdir(".");
-	
-    for(i=1; i<=numberof(all_files); i++) {
-	
-	
-	    if(strpart(all_files(i), -2:0) == ".vm"){
-		
-		//here i build the asm file
-		   file_name=strpart(all_files(i),1:-3)
-		   file_asm_name=swrite(format="%s%s",file_name,".asm");
-		   file_asm=open(file_asm_name,"w")
-		
-		//now we will read the file
-		   readfile, all_files(i),file_asm;
-		
-		}
-    }
-   
-} else {
-
-    write, "Directory not found.";
-}
-write,file_asm,"(END)";
-write,file_asm,"@END"
-write,file_asm,"0;JMP"
-close, file_asm;
 
 
