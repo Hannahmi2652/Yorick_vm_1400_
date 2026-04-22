@@ -17,6 +17,9 @@
  @SP
  M=M-1
 
+//label LOOP
+(LOOP)
+
 //push argument 0     
  @ARG
  A=M

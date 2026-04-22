@@ -1,6 +1,7 @@
 //C:/Hannahmi2652/Yorick_vm_1400_/main/main.i
-
+include, "Tar2/exe2.i"
 include, "Tar1/exe1.i"
+
 
 func readfile(fvm,f_asm)
 {
@@ -35,6 +36,7 @@ func readfile(fvm,f_asm)
 		 else if(token(1)== "neg")neg,f_asm;
 		 else if(token(1)== "eq"||token(1)== "lt"||token(1)== "gt") IF,token(1),f_asm;
 		 else if(token(1)== "not"||token(1)== "and"||token(1)== "or") BIT,token(1),f_asm;
+		 else if(token(1)== "label")Label, token(2), f_asm;
 		}
 		
 		   
