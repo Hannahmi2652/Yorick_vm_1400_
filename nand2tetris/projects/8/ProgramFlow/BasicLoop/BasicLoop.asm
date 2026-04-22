@@ -107,6 +107,13 @@
  @SP
  M=M+1
 
+//if-goto LOOP        // if n > 0, goto LOOP
+ @SP
+ AM=M-1
+ D=M
+ @LOOP        // if n > 0, goto LOOP
+ D;JGT
+
 //push local 0        // else, pushes sum to the stack's top
  @LCL
  A=M
