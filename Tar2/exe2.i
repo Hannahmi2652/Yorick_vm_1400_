@@ -16,7 +16,7 @@ func Label(label,f_asm)
 func Goto(label,f_asm)
 {
    write,f_asm,format="//Goto %s\n",label;
-   write,f_asm,"@label";
+   write,f_asm,format=" @%s\n",label;
    write,f_asm,"0;JMP\n";
 
 }

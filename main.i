@@ -1,4 +1,4 @@
-//C:/Hannahmi2652/Yorick_vm_1400_/main/main.i
+//C:/Hannahmi2652/Yorick_vm_1400_/main.i
 include, "Tar2/exe2.i"
 include, "Tar1/exe1.i"
 

@@ -32,8 +32,8 @@ func Push(segment,i,f_asm,name_file)
 
  else if(segment=="pointer")
  {
-    if(i=="0") write ,f_asm,"@THIS";
-	else if(i=="1") write ,f_asm,"@THAT";
+    if(i_int==0) {write ,f_asm,"@THIS";write,12;}
+	else if(i_int==1) write ,f_asm,"@THAT";
 	write ,f_asm,"D=M";
  }
 
@@ -92,25 +92,25 @@ func Pop(segment,i,f_asm,name_file)
   write ,f_asm,"A=M-1";
   write ,f_asm,"D=M";
   
-   if(segment=="static")
- {
+  if(segment=="static")
+  {
     write ,f_asm,format=" @%s%s\n",strpart(name_file, 1:-2),i;
 	write ,f_asm,"M=D";
- }
+  }
 
   else if(segment=="pointer")
   {
-    if(i=="0") write ,f_asm,"@THIS";
-	else if(i=="1") write ,f_asm,"@THAT";
+    if(i_int==0) write ,f_asm,"@THIS";
+	else if(i_int==1) write ,f_asm,"@THAT";
 	write ,f_asm,"M=D";
-  }
+   }
   
   else if(segment=="temp")  
   {
     i_int=i_int+5;
     write,f_asm ,format=" @%d\n",i_int;
     write ,f_asm,"M=D";
-  }
+   }
   
   else
   {

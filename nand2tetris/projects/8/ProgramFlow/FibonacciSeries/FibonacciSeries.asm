@@ -13,6 +13,7 @@
  @SP
  A=M-1
  D=M
+ @THAT
  M=D
  @SP
  M=M-1
@@ -115,7 +116,7 @@
  D;JGT
 
 //Goto END                // otherwise, goto END
- @label
+ @END                // otherwise, goto END
  0;JMP
 
 //label COMPUTE_ELEMENT
@@ -194,6 +195,7 @@
  @SP
  A=M-1
  D=M
+ @THAT
  M=D
  @SP
  M=M-1
@@ -237,7 +239,7 @@
  M=M-1
 
 //Goto LOOP
- @label
+ @LOOP
  0;JMP
 
 //label END
